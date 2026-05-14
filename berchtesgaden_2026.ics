@@ -1,0 +1,114 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Berchtesgaden Trip 2026//CS
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Berchtesgaden 19.-23.5.2026
+X-WR-TIMEZONE:Europe/Prague
+X-WR-CALDESC:Rodinny vylet s pratel do Berchtesgadenu - Hotel Rehlegg
+
+BEGIN:VTIMEZONE
+TZID:Europe/Prague
+BEGIN:STANDARD
+DTSTART:19701025T030000
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+TZNAME:CET
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:19700329T020000
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+TZNAME:CEST
+END:DAYLIGHT
+END:VTIMEZONE
+
+BEGIN:VEVENT
+UID:berchtesgaden-20260519-checkin@trip
+DTSTAMP:20260514T120000Z
+DTSTART;TZID=Europe/Prague:20260519T150000
+DTEND;TZID=Europe/Prague:20260519T180000
+SUMMARY:Prijezd & check-in Hotel Rehlegg
+LOCATION:Hotel Rehlegg, Holzengasse 16, 83486 Ramsau bei Berchtesgaden
+DESCRIPTION:Prijezd do hotelu\, vybaleni\, kratka prochazka po okoli.\n\nTIP: Hned u hotelu je idylicky kostelik St. Sebastian s drevenym mostem nad Ramsauer Ache - klasicka pohlednicova scena\, 15 min pesky.\n\nNa recepci se zeptat na BerchtesgadenCard (hostovska karta) - slevy a casto i autobusy zdarma.\n\nWeb hotelu: https://www.rehlegg.de
+URL:https://www.rehlegg.de
+END:VEVENT
+
+BEGIN:VEVENT
+UID:berchtesgaden-20260520-konigssee@trip
+DTSTAMP:20260514T120000Z
+DTSTART;TZID=Europe/Prague:20260520T090000
+DTEND;TZID=Europe/Prague:20260520T170000
+SUMMARY:Plavba po Konigssee (cely den)
+LOCATION:Seelande Konigssee\, Seestrasse 3\, 83471 Schoenau am Koenigssee
+DESCRIPTION:CELODENNI VYLET - nejlepsi den pro deti.\n\n9:00 - odjezd z hotelu (~20 min autem)\n10:00 - nalodeni\, plavba az na Salet (posledni zastavka\, 55 min cesty)\n- Cestou kapitan zatroubi na trumpetu - slavna ozvena od skal\n- Ze Saletu 15 min pesky k jezeru Obersee\n- Piknik\, prochazka po brehu\n\nZpatecni cesta s mezizastavkou ve St. Bartholomae (ikonicky kostelik s cervenymi banemi).\n\nTIPY:\n- Detem do 6 let jizda zdarma (vyzvednout na mole s dokladem)\n- Listek je PDF\, je nutne ho VYTISKNOUT\n- Vyrazit nejpozdeji do 10:30\, jinak fronty\n- Vzit svacinu a vodu\n\nREZERVACE: https://www.seenschifffahrt.de/en/koenigssee/online-tickets/
+URL:https://www.seenschifffahrt.de/en/koenigssee/online-tickets/
+END:VEVENT
+
+BEGIN:VEVENT
+UID:berchtesgaden-20260521-kehlstein@trip
+DTSTAMP:20260514T120000Z
+DTSTART;TZID=Europe/Prague:20260521T083000
+DTEND;TZID=Europe/Prague:20260521T130000
+SUMMARY:Orli hnizdo (Kehlsteinhaus)
+LOCATION:Kehlstein Busabfahrt\, Salzbergstrasse 45\, 83471 Berchtesgaden
+DESCRIPTION:Slavny Kehlsteinhaus ve vysce 1834 m.\n\n8:30 - vyjet z hotelu na parkoviste Obersalzberg\n- Vyzvednout listky\, byt minimalne 30 min pred odjezdem busu\n- Specialni bus vyveze nahoru po srpentinach\n- 124m tunel + mosazny vytah (41 sekund nahoru)\n- Cca 2 hodiny nahore: vyhledy\, kava/obed v restauraci\n\nPOZOR:\n- Pro deti neni interaktivni - vzit svacinu/hracky\, max 1\,5h\n- Nahore byva chladno (5-10 stupnu) a vitr - vrstvene obleceni\n- Pri pozdnim prichodu nelze prebookovat ani vratit penize\n- Slevy na hostovskou kartu nelze koupit online - pouze na pokladne\n\nREZERVACE: https://kehlsteinhaus.axess.shop/en
+URL:https://kehlsteinhaus.axess.shop/en
+END:VEVENT
+
+BEGIN:VEVENT
+UID:berchtesgaden-20260521-rossfeld@trip
+DTSTAMP:20260514T120000Z
+DTSTART;TZID=Europe/Prague:20260521T140000
+DTEND;TZID=Europe/Prague:20260521T170000
+SUMMARY:Rossfeld Panoramastrasse
+LOCATION:Rossfeld Panoramastrasse\, 83471 Berchtesgaden
+DESCRIPTION:Nejvyse polozena panoramaticka silnice v Nemecku - 360 vyhled na Alpy.\n\nMytna silnice\, jezdi se autem\, na vyhlidkach se zastavuje a vystupuje. Pro deti zajimave - jezdi se porad nahoru a vidi Alpy ze vsech stran.\n\nVZIT DALEKOHLED - vidi se az na Salzburg\, Watzmann a zpetne i Orli hnizdo.\n\nMytne se plati na miste (cca 9 EUR za auto).\n\nNavrat na hotel kolem 17-18h\, vecer relax v hotelovem wellness.\n\nInfo: https://www.rossfeldpanoramastrasse.de
+URL:https://www.rossfeldpanoramastrasse.de
+END:VEVENT
+
+BEGIN:VEVENT
+UID:berchtesgaden-20260522-saltmine@trip
+DTSTAMP:20260514T120000Z
+DTSTART;TZID=Europe/Prague:20260522T100000
+DTEND;TZID=Europe/Prague:20260522T123000
+SUMMARY:Solny dul Salzbergwerk Berchtesgaden
+LOCATION:Salzbergwerk Berchtesgaden\, Bergwerkstrasse 83\, 83471 Berchtesgaden
+DESCRIPTION:HIT PRO DETI - nejstarsi aktivni solny dul v Nemecku (od roku 1517).\n\nCO VAS CEKA:\n- 650m jizda hornickym vlackem do hory (3 min)\n- 2 skluzavky (s dospelym\, da se obejit)\n- Plavba lodkou pres podzemni solne jezero s hudbou a osvetlenim\n- Tour trva 1 hodinu\, chuze cca 800m\n- Cely zazitek 1\,5-2h vcetne obleceni\n\nDULEZITE:\n- Pod zemi je 12 stupnu - VZIT MIKINY i pro deti\n- Hornicke overaly dostanou vsichni vcetne deti\n- Prekladac do CESTINY k dispozici\n- Neni vhodne pro kocarky (ale lze nosit v sat)\n\nDeti 4 a 5 let to budou milovat - vlacek\, skluzavky\, lodicka.\n\nREZERVACE: https://www.salzbergwerk.de/en
+URL:https://www.salzbergwerk.de/en
+END:VEVENT
+
+BEGIN:VEVENT
+UID:berchtesgaden-20260522-therme@trip
+DTSTAMP:20260514T120000Z
+DTSTART;TZID=Europe/Prague:20260522T140000
+DTEND;TZID=Europe/Prague:20260522T170000
+SUMMARY:Rupertustherme Bad Reichenhall
+LOCATION:Rupertustherme\, Frueauerstrasse 13\, 83435 Bad Reichenhall
+DESCRIPTION:Idealni kombinace po zime v solnem dole.\n\n~25 min autem od solneho dolu.\n\nDVE CASTI:\n- Rodinny aquapark - skluzavky a tobogany pro deti\n- Klidna cast s pool barem a vyhledem na hory (obvykle od 16 let)\n- Domluvit se s manzelkou/prateli na vystridani u deti\n\nPocitat 2\,5-3 hodiny. Rezervace neni potreba\, listky u vchodu.\n\nNAVRAT NA HOTEL KOLEM 18H.\n\nInfo & otviraci doba: https://www.rupertustherme.de/
+URL:https://www.rupertustherme.de/
+END:VEVENT
+
+BEGIN:VEVENT
+UID:berchtesgaden-20260523-checkout@trip
+DTSTAMP:20260514T120000Z
+DTSTART;TZID=Europe/Prague:20260523T090000
+DTEND;TZID=Europe/Prague:20260523T120000
+SUMMARY:Posledni prochazka & odjezd
+LOCATION:Hotel Rehlegg\, Ramsau bei Berchtesgaden
+DESCRIPTION:Po snidani lehky program v okoli hotelu pred cestou domu.\n\nMOZNOSTI (vyberte si jednu):\n\n1) WIMBACHKLAMM - kratky vodopadovy kanyon\, drevene lavky\, ~30 min jednim smerem. Snazsi varianta\, super pro deti.\n\n2) ALMBACHKLAMM - delsi a divocejsi kanyon\, take s lavkami.\n\n3) HINTERSEE - pohadkove jezirko v Ramsau\, obejde se za hodinu i s kocarkem.\n\nPak pozdni obed\, check-out\, cesta domu.\n\nCESTOU DOMU (pokud chcete):\n- Enzian palirna v Berchtesgadenu - https://www.enzian-grassl.com/ (kamarad rikal ze je to hnus\, ale jako darek pro rodinu :)
+URL:https://www.rehlegg.de
+END:VEVENT
+
+BEGIN:VEVENT
+UID:berchtesgaden-20260518-reminder@trip
+DTSTAMP:20260514T120000Z
+DTSTART;VALUE=DATE:20260518
+DTEND;VALUE=DATE:20260519
+SUMMARY:PRIPOMINKA - Rezervace na vylet (zkontrolovat)
+DESCRIPTION:Pred odjezdem zkontrolovat ze mate vse rezervovane:\n\n1) Konigssee lode (streda 20.5.\, ~10:00)\nhttps://www.seenschifffahrt.de/en/koenigssee/online-tickets/\n=> VYTISKNOUT PDF listek!\n\n2) Orli hnizdo (ctvrtek 21.5.\, 8:30 bus)\nhttps://kehlsteinhaus.axess.shop/en\n\n3) Solny dul (patek 22.5.\, 10:00)\nhttps://www.salzbergwerk.de/en\n\nCO SBALIT:\n- Mikiny/bundu (12 stupnu v dole\, 5-10 nahore na Kehlsteinu)\n- Pevne boty\n- Dalekohled (Rossfeld\, Orli hnizdo)\n- Plavky (Rupertustherme)\n- Svaciny a vodu pro deti\n- Vytistene listky\n- Doklady deti (kvuli slevam/zdarma)
+END:VEVENT
+
+END:VCALENDAR

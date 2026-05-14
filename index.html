@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berchtesgaden · 19.–23. května 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #2d3a2e;
+    --moss: #4a5d3f;
+    --stone: #6e6759;
+    --mist: #d8d4cb;
+    --paper: #f4f1ea;
+    --ink: #1a1f1c;
+    --rust: #a0522d;
+    --gold: #c2a075;
+    --gold-dark: #85683a;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* Decorative grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    mix-blend-mode: multiply;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--forest) 0%, var(--moss) 100%);
+    color: var(--paper);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 2rem;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at top, rgba(184, 149, 106, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(74, 93, 63, 0.4) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Mountain silhouette */
+  .mountains {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: fadeIn 1s ease-out;
+  }
+
+  .eyebrow::before, .eyebrow::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1.2s ease-out 0.2s both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  .hero-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--mist);
+    margin-bottom: 3rem;
+    animation: fadeUp 1.2s ease-out 0.4s both;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(216, 212, 203, 0.2);
+    animation: fadeUp 1.2s ease-out 0.6s both;
+  }
+
+  .meta-item .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+  }
+
+  .meta-item .value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--paper);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mist);
+    opacity: 0.9;
+    animation: bounce 2s infinite;
+  }
+
+  /* ===== NAV ===== */
+  .day-nav {
+    background: var(--forest);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(184, 149, 106, 0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  .day-nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .day-nav a {
+    color: var(--mist);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .day-nav a:hover {
+    color: var(--gold);
+    background: rgba(184, 149, 106, 0.1);
+  }
+
+  /* ===== DAYS ===== */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .day {
+    padding: 6rem 0 4rem;
+    border-bottom: 1px solid var(--mist);
+    position: relative;
+  }
+
+  .day:last-of-type {
+    border-bottom: none;
+  }
+
+  .day-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 4rem;
+  }
+
+  .day-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(5rem, 12vw, 9rem);
+    font-weight: 400;
+    line-height: 0.85;
+    color: var(--moss);
+    font-style: italic;
+  }
+
+  .day-info .day-date {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1rem;
+  }
+
+  .day-info h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--forest);
+    margin-bottom: 1rem;
+  }
+
+  .day-info .day-desc {
+    color: var(--stone);
+    font-size: 1.05rem;
+    max-width: 600px;
+  }
+
+  /* ===== ACTIVITY CARDS ===== */
+  .activity {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--mist);
+    position: relative;
+  }
+
+  .activity:hover .activity-time {
+    color: var(--rust);
+  }
+
+  .activity-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--moss);
+    transition: color 0.3s ease;
+    padding-top: 0.3rem;
+  }
+
+  .activity-time .duration {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--stone);
+    font-style: normal;
+    margin-top: 0.3rem;
+  }
+
+  .activity-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--forest);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .activity-content .activity-location {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 1rem;
+  }
+
+  .activity-address {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    padding: 0.9rem 1.1rem;
+    background: rgba(160, 82, 45, 0.06);
+    border-radius: 4px;
+    border: 1px solid rgba(160, 82, 45, 0.15);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .activity-address:hover {
+    background: rgba(160, 82, 45, 0.12);
+    border-color: var(--rust);
+    transform: translateX(3px);
+  }
+
+  .activity-address svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    color: var(--rust);
+    margin-top: 2px;
+  }
+
+  .activity-address .address-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .activity-address .address-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.2rem;
+    font-weight: 600;
+  }
+
+  .activity-address .address-line {
+    font-size: 0.95rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .activity-address .address-arrow {
+    flex-shrink: 0;
+    font-size: 1.2rem;
+    color: var(--rust);
+    align-self: center;
+    transition: transform 0.3s ease;
+  }
+
+  .activity-address:hover .address-arrow {
+    transform: translateX(4px);
+  }
+
+  .activity-website {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.5rem 0;
+    color: var(--moss);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(74, 93, 63, 0.3);
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .activity-website:hover {
+    color: var(--rust);
+    border-bottom-color: var(--rust);
+  }
+
+  .activity-website svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .activity-website .domain {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+  }
+
+  .pricing {
+    background: linear-gradient(135deg, rgba(184, 149, 106, 0.08) 0%, rgba(74, 93, 63, 0.05) 100%);
+    border-radius: 4px;
+    padding: 1.1rem 1.3rem;
+    margin: 1.5rem 0;
+    border: 1px solid rgba(184, 149, 106, 0.25);
+  }
+
+  .pricing-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pricing-label::before {
+    content: '€';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: var(--gold-dark);
+    color: var(--paper);
+    border-radius: 50%;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .pricing dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.4rem 1.2rem;
+    margin: 0;
+  }
+
+  .pricing dt {
+    color: var(--stone);
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .pricing dd {
+    margin: 0;
+    color: var(--ink);
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .pricing dd .free {
+    color: var(--moss);
+  }
+
+  .pricing-note {
+    margin-top: 0.8rem;
+    padding-top: 0.7rem;
+    border-top: 1px dashed rgba(184, 149, 106, 0.3);
+    font-size: 0.85rem;
+    color: var(--stone);
+    font-style: italic;
+  }
+
+  .activity-content p {
+    color: var(--ink);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  .tips {
+    background: rgba(74, 93, 63, 0.06);
+    border-left: 3px solid var(--moss);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .tips-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
+
+  .tips ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tips li {
+    padding: 0.3rem 0 0.3rem 1.2rem;
+    position: relative;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  .tips li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--moss);
+  }
+
+  .booking-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.7rem 1.4rem;
+    background: var(--forest);
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--forest);
+  }
+
+  .booking-link:hover {
+    background: var(--rust);
+    border-color: var(--rust);
+    transform: translateY(-2px);
+  }
+
+  .booking-link::after {
+    content: '→';
+    transition: transform 0.3s ease;
+  }
+
+  .booking-link:hover::after {
+    transform: translateX(4px);
+  }
+
+  /* ===== CHECKLIST SECTION ===== */
+  .checklist-section {
+    background: var(--forest);
+    color: var(--paper);
+    padding: 6rem 2rem;
+    margin-top: 4rem;
+  }
+
+  .checklist-section .container {
+    max-width: 1100px;
+  }
+
+  .checklist-section .section-eyebrow {
+    color: var(--gold);
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .checklist-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+
+  .checklist-section h2 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .checklist-card {
+    background: rgba(244, 241, 234, 0.05);
+    border: 1px solid rgba(184, 149, 106, 0.2);
+    padding: 2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .checklist-card:hover {
+    background: rgba(244, 241, 234, 0.08);
+    border-color: var(--gold);
+  }
+
+  .checklist-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--gold);
+  }
+
+  .checklist-card ul {
+    list-style: none;
+  }
+
+  .checklist-card li {
+    padding: 0.4rem 0;
+    color: var(--mist);
+    font-size: 0.95rem;
+    position: relative;
+    padding-left: 1.3rem;
+  }
+
+  .checklist-card li::before {
+    content: '◦';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* ===== CALENDAR DOWNLOAD CTA ===== */
+  .cta-section {
+    background: var(--paper);
+    padding: 5rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--mist);
+  }
+
+  .cta-section h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 500;
+    color: var(--forest);
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .cta-section p {
+    color: var(--stone);
+    max-width: 500px;
+    margin: 0 auto 2rem;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2.5rem;
+    background: var(--rust);
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background: var(--forest);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: var(--mist);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  footer p {
+    margin-bottom: 0.5rem;
+  }
+
+  footer .signature {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.1rem;
+    margin-top: 1rem;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .day-header {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .day-number {
+      font-size: 5rem;
+    }
+
+    .activity {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .activity-time {
+      font-size: 1.3rem;
+    }
+
+    .hero {
+      padding: 3rem 1.5rem;
+    }
+
+    .container {
+      padding: 0 1.5rem;
+    }
+
+    .day {
+      padding: 4rem 0 3rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="mountains" viewBox="0 0 1200 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,300 L0,180 L150,80 L280,150 L400,60 L550,140 L680,50 L820,130 L950,70 L1100,150 L1200,90 L1200,300 Z" fill="#1a1f1c"/>
+    <path d="M0,300 L0,220 L120,160 L250,200 L380,140 L520,190 L650,130 L780,180 L920,150 L1050,200 L1200,170 L1200,300 Z" fill="#0d110f" opacity="0.7"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="eyebrow">Společný výlet</div>
+    <h1>Berchtesgaden<br><em>& bavorské Alpy</em></h1>
+    <div class="hero-date">19. — 23. května 2026 · pět dní v horách</div>
+
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="label">Ubytování</div>
+        <div class="value">Hotel Rehlegg</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Lokalita</div>
+        <div class="value">Ramsau bei Berchtesgaden</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Délka</div>
+        <div class="value">5 dní / 4 noci</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Společnost</div>
+        <div class="value">Rodiny s dětmi</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">↓ Program ↓</div>
+</section>
+
+<!-- NAV -->
+<nav class="day-nav">
+  <div class="day-nav-inner">
+    <a href="#den1">Úterý · Příjezd</a>
+    <a href="#den2">Středa · Königssee</a>
+    <a href="#den3">Čtvrtek · Orlí hnízdo</a>
+    <a href="#den4">Pátek · Solný důl</a>
+    <a href="#den5">Sobota · Odjezd</a>
+    <a href="#checklist">Před odjezdem</a>
+  </div>
+</nav>
+
+<!-- DEN 1 -->
+<div class="container">
+  <section class="day" id="den1">
+    <div class="day-header">
+      <div class="day-number">01</div>
+      <div class="day-info">
+        <div class="day-date">Úterý · 19. května</div>
+        <h2>Příjezd & první nadechnutí</h2>
+        <div class="day-desc">Cesta z Česka zabere 5–7 hodin podle výchozího bodu. Po příjezdu jen lehký večerní program, ať si všichni odpočinou před prvním plným dnem.</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="activity-time">15:00<span class="duration">~3 hodiny</span></div>
+      <div class="activity-content">
+        <h3>Check-in v Hotelu Rehlegg</h3>
+        <div class="activity-location">Ramsau bei Berchtesgaden</div>
+        <a class="activity-address" href="https://www.google.com/maps/dir/?api=1&destination=Berghotel+Rehlegg%2C+Holzengasse+16%2C+83486+Ramsau+bei+Berchtesgaden%2C+Germany" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div class="address-text">
+            <div class="address-label">Navigovat</div>
+            <div class="address-line">Holzengasse 16, 83486 Ramsau bei Berchtesgaden</div>
+          </div>
+          <div class="address-arrow">→</div>
+        </a>
+        <a class="activity-website" href="https://www.rehlegg.de" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Oficiální web: <span class="domain">rehlegg.de</span>
+        </a>
+        <p>Vybalení, kafe na terase, první pohled na Watzmann. Renovace pokojů je už hotová, takže si v klidu zdřímnete.</p>
+        <div class="tips">
+          <div class="tips-label">Tip</div>
+          <ul>
+            <li>Na recepci se zeptat na BerchtesgadenCard (hostovská karta) — slevy a často autobusy v okolí zdarma</li>
+          </ul>
+        </div>
+        <a class="booking-link" href="https://www.rehlegg.de" target="_blank" rel="noopener">Hotel Rehlegg</a>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="activity-time">18:00<span class="duration">1 hodina</span></div>
+      <div class="activity-content">
+        <h3>Procházka ke kostelíku St. Sebastian</h3>
+        <div class="activity-location">15 min pěšky od hotelu</div>
+        <a class="activity-address" href="https://www.google.com/maps/dir/?api=1&destination=Pfarrkirche+St.+Sebastian%2C+Im+Tal+82%2C+83486+Ramsau+bei+Berchtesgaden%2C+Germany" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div class="address-text">
+            <div class="address-label">Navigovat</div>
+            <div class="address-line">Im Tal 82, 83486 Ramsau bei Berchtesgaden</div>
+          </div>
+          <div class="address-arrow">→</div>
+        </a>
+        <a class="activity-website" href="https://www.ramsau.de/sehenswuerdigkeiten/kirchen-und-kapellen/pfarrkirche-st-sebastian.html" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Info: <span class="domain">ramsau.de</span>
+        </a>
+        <p>Pohlednicová scéna s dřevěným mostem nad říčkou Ramsauer Ache. Krásné světlo ve večerních hodinách. Děti to zvládnou levou zadní.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEN 2 -->
+  <section class="day" id="den2">
+    <div class="day-header">
+      <div class="day-number">02</div>
+      <div class="day-info">
+        <div class="day-date">Středa · 20. května</div>
+        <h2>Königssee · plavba mezi skalami</h2>
+        <div class="day-desc">Celodenní výlet, který si zamilují všichni. Elektrické lodě plují po jednom z nejkrásnějších alpských jezer už od roku 1909 — žádný hluk, jen šplouchání vody a ozvěna od skal.</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="activity-time">09:00<span class="duration">8 hodin</span></div>
+      <div class="activity-content">
+        <h3>Plavba k jezeru Obersee a St. Bartholomä</h3>
+        <div class="activity-location">Schönau am Königssee · ~20 min autem</div>
+        <a class="activity-address" href="https://www.google.com/maps/dir/?api=1&destination=Schiffsanlegestelle+K%C3%B6nigssee%2C+Seestra%C3%9Fe+3%2C+83471+Sch%C3%B6nau+am+K%C3%B6nigssee%2C+Germany" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div class="address-text">
+            <div class="address-label">Navigovat — parkoviště u mola</div>
+            <div class="address-line">Seestraße 3, 83471 Schönau am Königssee</div>
+          </div>
+          <div class="address-arrow">→</div>
+        </a>
+        <a class="activity-website" href="https://www.seenschifffahrt.de/en/koenigssee" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Oficiální web s jízdním řádem: <span class="domain">seenschifffahrt.de</span>
+        </a>
+        <div class="pricing">
+          <div class="pricing-label">Ceny 2026 (zpáteční jízdenka až do Salet)</div>
+          <dl>
+            <dt>Dospělý</dt><dd>~22,50 €</dd>
+            <dt>Dítě 6–17 let</dt><dd>~11,30 €</dd>
+            <dt>Dítě do 5 let</dt><dd><span class="free">zdarma</span> (s dokladem)</dd>
+            <dt>Rodinná sleva</dt><dd>k dispozici pro 2+ děti</dd>
+            <dt>Parkoviště</dt><dd>placené, ~5–8 €/den</dd>
+          </dl>
+          <div class="pricing-note">Kratší trasa jen do St. Bartholomä je levnější. Akceptují kartu, ale jedna pokladna je pouze hotovost.</div>
+        </div>
+        <p>Vyrazit z hotelu v 9:00. Plavba k poslední zastávce Salet trvá 55 minut, cestou kapitán zatroubí na trumpetu, aby ukázal slavnou ozvěnu od skal. Ze Saletu je to 15 minut pěšky k jezeru Obersee — méně známé, klidnější, krásné.</p>
+        <p>Na zpáteční cestě se vystoupí ve St. Bartholomä — ikonický kostelík s červenými báněmi. Krátká procházka, něco k jídlu, pokud je hezky, děti si můžou máčet nohy v oblázkové pláži (15 min jižně od mola).</p>
+        <div class="tips">
+          <div class="tips-label">Před cestou</div>
+          <ul>
+            <li>Děti do 6 let jezdí zdarma — lístek si vyzvednete na molu po předložení dokladu</li>
+            <li>Lístek dostanete jako PDF — <strong>je nutné ho vytisknout</strong>, bez toho vás na loď nepustí</li>
+            <li>Vyrazit nejpozději do 10:30, jinak fronty</li>
+            <li>Svačiny a vodu s sebou, restaurace u molu bývají drahé</li>
+          </ul>
+        </div>
+        <a class="booking-link" href="https://www.seenschifffahrt.de/en/koenigssee/online-tickets/" target="_blank" rel="noopener">Rezervovat lístky</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEN 3 -->
+  <section class="day" id="den3">
+    <div class="day-header">
+      <div class="day-number">03</div>
+      <div class="day-info">
+        <div class="day-date">Čtvrtek · 21. května</div>
+        <h2>Orlí hnízdo & Rossfeld</h2>
+        <div class="day-desc">Den pro dospělé. Kombinace nejslavnější historické stavby v okolí s nejvýše položenou panoramatickou silnicí v Německu. Pro děti to může být místy nuda — počítejte s tím a vezměte svačinky.</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="activity-time">08:30<span class="duration">~4 hodiny</span></div>
+      <div class="activity-content">
+        <h3>Kehlsteinhaus / Orlí hnízdo</h3>
+        <div class="activity-location">1834 m n. m. · Obersalzberg</div>
+        <a class="activity-address" href="https://www.google.com/maps/dir/?api=1&destination=Kehlstein+Busabfahrt%2C+Salzbergstra%C3%9Fe+45%2C+83471+Berchtesgaden%2C+Germany" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div class="address-text">
+            <div class="address-label">Navigovat — parkoviště Obersalzberg (odjezd busů)</div>
+            <div class="address-line">Salzbergstraße 45, 83471 Berchtesgaden</div>
+          </div>
+          <div class="address-arrow">→</div>
+        </a>
+        <a class="activity-website" href="https://www.kehlsteinhaus.de" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Oficiální web: <span class="domain">kehlsteinhaus.de</span>
+        </a>
+        <div class="pricing">
+          <div class="pricing-label">Ceny 2026 (bus + výtah, zpáteční)</div>
+          <dl>
+            <dt>Dospělý</dt><dd>~32,50 €</dd>
+            <dt>Dítě 6–14 let</dt><dd>~19,00 €</dd>
+            <dt>Dítě do 5 let</dt><dd><span class="free">zdarma</span></dd>
+            <dt>Rodinná jízdenka</dt><dd>~75 € (2 dospělí + děti)</dd>
+            <dt>Parkoviště Obersalzberg</dt><dd>placené, ~5 €/den</dd>
+            <dt>Vstup do budovy</dt><dd><span class="free">zdarma</span> (zahrnut v jízdence)</dd>
+          </dl>
+          <div class="pricing-note">Ceny jsou orientační, finální najdeš v ticketshopu. Slevy s hostovskou kartou jen na pokladně, ne online. Bus #838 z Berchtesgaden nádraží na parkoviště Obersalzberg.</div>
+        </div>
+        <p>Vyjet z hotelu kolem 8:30 na parkoviště Obersalzberg. Po vyzvednutí lístků nasednete do speciálního busu, který vás po serpentinách vyveze nahoru. Pak 124metrový tunel a slavný mosazný výtah, který za 41 sekund vyjede přímo do Kehlsteinhausu.</p>
+        <p>Nahoře cca 2 hodiny — výhledy, kafe nebo oběd v horské restauraci, pár tabulí o historii stavby.</p>
+        <div class="tips">
+          <div class="tips-label">Důležité</div>
+          <ul>
+            <li>Být na místě minimálně <strong>30 minut před odjezdem busu</strong> — při pozdním příchodu nelze přebookovat ani vrátit peníze</li>
+            <li>Nahoře bývá chladno (5–10 °C) a vítr — vrstvené oblečení</li>
+            <li>Pro děti není moc interaktivní — počítejte s max. 1,5 hodinou nahoře</li>
+            <li>Slevy na hostovskou kartu jen na pokladně, ne online</li>
+          </ul>
+        </div>
+        <a class="booking-link" href="https://kehlsteinhaus.axess.shop/en" target="_blank" rel="noopener">Rezervovat bus</a>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="activity-time">14:00<span class="duration">~3 hodiny</span></div>
+      <div class="activity-content">
+        <h3>Rossfeld Panoramastraße</h3>
+        <div class="activity-location">Nejvyšší panoramatická silnice v Německu</div>
+        <a class="activity-address" href="https://www.google.com/maps/dir/?api=1&destination=Rossfeld+Panoramastra%C3%9Fe%2C+Mautstelle+Oberau%2C+83471+Berchtesgaden%2C+Germany" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div class="address-text">
+            <div class="address-label">Navigovat — mýtná brána Oberau</div>
+            <div class="address-line">Rossfeld Panoramastraße, 83471 Berchtesgaden</div>
+          </div>
+          <div class="address-arrow">→</div>
+        </a>
+        <a class="activity-website" href="https://www.rossfeldpanoramastrasse.de" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Oficiální web (mýtné, info): <span class="domain">rossfeldpanoramastrasse.de</span>
+        </a>
+        <div class="pricing">
+          <div class="pricing-label">Mýtné 2026 (platí 24 hodin)</div>
+          <dl>
+            <dt>Osobní auto (vč. posádky)</dt><dd>9,50 €</dd>
+            <dt>Motorka</dt><dd>6,00 €</dd>
+            <dt>Parkoviště na vyhlídkách</dt><dd><span class="free">zdarma</span> (cca 400 míst)</dd>
+          </dl>
+          <div class="pricing-note">Platí se na bráně (sever nebo jih), automaty berou kartu. Děti v autě se zvlášť neplatí. Mýtné pokrývá celý okruh i opakované projetí.</div>
+        </div>
+        <p>360° výhled na Alpy. Mýtná silnice, jezdí se autem, na vyhlídkách se zastavuje a vystupuje. Pro děti zajímavé tím, že se "jezdí pořád nahoru" a Alpy jsou vidět ze všech stran.</p>
+        <div class="tips">
+          <div class="tips-label">Co s sebou</div>
+          <ul>
+            <li><strong>Dalekohled</strong> — vidíte až na Salzburg, Watzmann a zpětně i Orlí hnízdo</li>
+            <li>Mýtné se platí na místě (cca 9 € za auto)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEN 4 -->
+  <section class="day" id="den4">
+    <div class="day-header">
+      <div class="day-number">04</div>
+      <div class="day-info">
+        <div class="day-date">Pátek · 22. května</div>
+        <h2>Solný důl & lázně</h2>
+        <div class="day-desc">Den pro děti — hornický vláček, skluzavky, plavba lodičkou přes podzemní solné jezero. Po hodině zimy v dole ideální zahřátí v termálních lázních.</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="activity-time">10:00<span class="duration">2 hodiny</span></div>
+      <div class="activity-content">
+        <h3>Salzbergwerk Berchtesgaden</h3>
+        <div class="activity-location">Nejstarší aktivní solný důl v Německu · od roku 1517</div>
+        <a class="activity-address" href="https://www.google.com/maps/dir/?api=1&destination=Salzbergwerk+Berchtesgaden%2C+Bergwerkstra%C3%9Fe+83%2C+83471+Berchtesgaden%2C+Germany" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div class="address-text">
+            <div class="address-label">Navigovat</div>
+            <div class="address-line">Bergwerkstraße 83, 83471 Berchtesgaden</div>
+          </div>
+          <div class="address-arrow">→</div>
+        </a>
+        <a class="activity-website" href="https://www.salzbergwerk.de/en" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Oficiální web: <span class="domain">salzbergwerk.de</span>
+        </a>
+        <div class="pricing">
+          <div class="pricing-label">Ceny 2026 (vstupné s prohlídkou)</div>
+          <dl>
+            <dt>Dospělý</dt><dd>26,50 €</dd>
+            <dt>Rodinná jízdenka (2D + 1 dítě)</dt><dd>59,00 €</dd>
+            <dt>Každé další dítě</dt><dd>+ 8,00 €</dd>
+            <dt>Dítě do 3 let</dt><dd><span class="free">zdarma</span></dd>
+            <dt>Parkoviště u dolu</dt><dd>placené, pouze kartou</dd>
+            <dt>Parking u návštěvnického centra</dt><dd><span class="free">zdarma</span> (omezený počet míst)</dd>
+          </dl>
+          <div class="pricing-note">Bus #840 z Berchtesgaden nádraží jede přímo k dolu (5 min, zastávka „Salzbergwerk"). S BGL day ticketem na dopravu pak sleva 10 % na vstupném.</div>
+        </div>
+        <p>Tour začíná 650metrovou jízdou hornickým vláčkem do hory (3 min). Pak dvě dřevěné skluzavky — s malými dětmi v doprovodu dospělého (lze obejít po schodech). Závěr tvoří plavba lodičkou přes podzemní solné jezero s hudbou, ztlumeným světlem a krystaly rostoucími na stěnách.</p>
+        <p>Celkem hodina pod zemí, ujdete asi 800 metrů. S oblékáním a vrácením overalů počítejte 1,5–2 hodiny.</p>
+        <div class="tips">
+          <div class="tips-label">Co vědět</div>
+          <ul>
+            <li>Pod zemí je celoročně <strong>12 °C</strong> — vzít mikiny i pro děti</li>
+            <li>Všichni dostanou hornické overaly včetně malých velikostí pro děti</li>
+            <li>K dispozici překladač do <strong>češtiny</strong></li>
+            <li>Pro děti 4–5 let je to ideální věk — vláček, skluzavky a lodička je nadchnou</li>
+            <li>Není vhodné pro kočárky (ale dá se nést v šátku)</li>
+          </ul>
+        </div>
+        <a class="booking-link" href="https://www.salzbergwerk.de/en" target="_blank" rel="noopener">Rezervovat tour</a>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="activity-time">14:00<span class="duration">~3 hodiny</span></div>
+      <div class="activity-content">
+        <h3>Rupertustherme Bad Reichenhall</h3>
+        <div class="activity-location">25 min autem od solného dolu</div>
+        <a class="activity-address" href="https://www.google.com/maps/dir/?api=1&destination=Rupertustherme%2C+Friedrich-Ebert-Allee+21%2C+83435+Bad+Reichenhall%2C+Germany" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div class="address-text">
+            <div class="address-label">Navigovat</div>
+            <div class="address-line">Friedrich-Ebert-Allee 21, 83435 Bad Reichenhall</div>
+          </div>
+          <div class="address-arrow">→</div>
+        </a>
+        <a class="activity-website" href="https://www.rupertustherme.de/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Oficiální web: <span class="domain">rupertustherme.de</span>
+        </a>
+        <div class="pricing">
+          <div class="pricing-label">Ceny 2026 — Rodinný bazén (FamilienBad)</div>
+          <dl>
+            <dt>3 hodiny — dospělý</dt><dd>~26,00 €</dd>
+            <dt>3 hodiny — dítě do 7 let</dt><dd>~21,00 €</dd>
+            <dt>Celý den — dospělý</dt><dd>~35,00 €</dd>
+            <dt>Dítě do 4 let</dt><dd>vstup pouze do FamilienBad</dd>
+            <dt>Čip jako záloha</dt><dd>10 €, vrací se</dd>
+          </dl>
+          <div class="pricing-note">🎉 Akce 22.5.–7.6.2026: během bavorských prázdnin Pfingstferien dostanete celodenní vstup za cenu 3hodinové. Sauna a klidná termální část jsou od 16 let.</div>
+        </div>
+        <p>Lázně mají dvě části — rodinný aquapark se skluzavkami a tobogány pro děti, a klidnější část s venkovním bazénem, pool barem a výhledem na hory (obvykle od 16 let). Domluvte se s ostatními na vystřídání u dětí, ať si každý užije obě části.</p>
+        <div class="tips">
+          <div class="tips-label">Praktické</div>
+          <ul>
+            <li>Rezervace není potřeba, lístky u vchodu</li>
+            <li>Plánovat 2,5–3 hodiny</li>
+            <li>Návrat na hotel kolem 18:00</li>
+          </ul>
+        </div>
+        <a class="booking-link" href="https://www.rupertustherme.de/" target="_blank" rel="noopener">Otevírací doba</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEN 5 -->
+  <section class="day" id="den5">
+    <div class="day-header">
+      <div class="day-number">05</div>
+      <div class="day-info">
+        <div class="day-date">Sobota · 23. května</div>
+        <h2>Poslední procházka & domů</h2>
+        <div class="day-desc">Lehký dopolední program v okolí hotelu, pozdní oběd a cesta domů. Vyberte si jednu z procházek podle toho, jak budou všichni unavení.</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="activity-time">09:00<span class="duration">2–3 hodiny</span></div>
+      <div class="activity-content">
+        <h3>Vyberte si: kanyon nebo jezírko</h3>
+        <div class="activity-location">Vše v okolí Ramsau</div>
+        <p><strong>Wimbachklamm</strong> — krátký vodopádový kanyon s dřevěnými lávkami, ~30 min jedním směrem. Snazší varianta, ideální pro děti.</p>
+        <a class="activity-website" href="https://www.berchtesgaden.de/wimbachklamm" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Info Wimbachklamm: <span class="domain">berchtesgaden.de</span>
+        </a>
+        <div class="pricing">
+          <div class="pricing-label">Ceny 2026 — vstupné Wimbachklamm</div>
+          <dl>
+            <dt>Vstup (od 7 let)</dt><dd>~4 €</dd>
+            <dt>Děti do 7 let</dt><dd><span class="free">zdarma</span></dd>
+            <dt>Parkoviště Wimbachbrücke</dt><dd>placené, ~6 €/den</dd>
+            <dt>Hostovská karta</dt><dd>sleva na parkovném</dd>
+          </dl>
+          <div class="pricing-note">Vstupné se kupuje jako mince z automatu ~150 m před turniketem. Otevřeno od května. Alternativa: bus #846 z Berchtesgadenu — ušetříte parkovné.</div>
+        </div>
+        <a class="activity-address" href="https://www.google.com/maps/dir/?api=1&destination=Wimbachklamm%2C+83486+Ramsau+bei+Berchtesgaden%2C+Germany" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div class="address-text">
+            <div class="address-label">Navigovat — Wimbachklamm</div>
+            <div class="address-line">Wimbachweg, 83486 Ramsau bei Berchtesgaden</div>
+          </div>
+          <div class="address-arrow">→</div>
+        </a>
+        <p><strong>Almbachklamm</strong> — delší a divočejší kanyon, taky s lávkami. Pro starší/zdatnější.</p>
+        <a class="activity-website" href="https://www.almbachklamm.de" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Oficiální web: <span class="domain">almbachklamm.de</span>
+        </a>
+        <a class="activity-address" href="https://www.google.com/maps/dir/?api=1&destination=Almbachklamm+Kugelm%C3%BChle%2C+Kugelm%C3%BChlweg+18%2C+83487+Marktschellenberg%2C+Germany" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div class="address-text">
+            <div class="address-label">Navigovat — Almbachklamm</div>
+            <div class="address-line">Kugelmühlweg 18, 83487 Marktschellenberg</div>
+          </div>
+          <div class="address-arrow">→</div>
+        </a>
+        <p><strong>Hintersee</strong> — pohádkové jezírko v Ramsau, obejde se za hodinu i s kočárkem. Klidná varianta.</p>
+        <a class="activity-website" href="https://www.ramsau.de/sehenswuerdigkeiten/unser-dorf/hintersee.html" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Info Hintersee: <span class="domain">ramsau.de</span>
+        </a>
+        <a class="activity-address" href="https://www.google.com/maps/dir/?api=1&destination=Hintersee%2C+83486+Ramsau+bei+Berchtesgaden%2C+Germany" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div class="address-text">
+            <div class="address-label">Navigovat — Hintersee</div>
+            <div class="address-line">Hintersee, 83486 Ramsau bei Berchtesgaden</div>
+          </div>
+          <div class="address-arrow">→</div>
+        </a>
+        <div class="tips">
+          <div class="tips-label">Bonus cestou domů</div>
+          <ul>
+            <li>Pokud chcete suvenýr — palírna Enzian Grassl v Berchtesgadenu. Pálenka prý chutná hrozně, ale jako dárek pro rodinu funguje :)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- BUDGET TIPS -->
+<section class="checklist-section" style="background: var(--forest); border-top: 1px solid rgba(184, 149, 106, 0.15);">
+  <div class="container">
+    <div class="section-eyebrow">Praktické tipy</div>
+    <h2>Doprava<br><em>& úspory</em></h2>
+
+    <div class="checklist-grid">
+      <div class="checklist-card">
+        <h4>BerchtesgadenCard zdarma</h4>
+        <ul>
+          <li>Dostane každý host hotelu Rehlegg na recepci</li>
+          <li>Bus 838, 840, 846 v okolí často zdarma</li>
+          <li>Sleva na parkovném (Wimbachbrücke a další)</li>
+          <li>Sleva na vstup k Orlímu hnízdu</li>
+          <li>Sleva 10 % v solném dole</li>
+        </ul>
+      </div>
+
+      <div class="checklist-card">
+        <h4>Užitečné autobusy</h4>
+        <ul>
+          <li>#846: Berchtesgaden → Wimbachbrücke → Ramsau</li>
+          <li>#838: Berchtesgaden → Obersalzberg (Orlí hnízdo)</li>
+          <li>#840: Berchtesgaden → solný důl → Salzburg</li>
+          <li>#841: Berchtesgaden → Königssee</li>
+          <li>#848: směr Rossfeld Panoramastraße</li>
+        </ul>
+      </div>
+
+      <div class="checklist-card">
+        <h4>Kolik kartou, kolik hotově</h4>
+        <ul>
+          <li>Karta: většina pokladen, parkovací automaty, mýtné</li>
+          <li>Hotovost: jedna pokladna u Königssee, drobné mince na turniket Wimbachklamm</li>
+          <li>Solný důl, Orlí hnízdo, Therme: oboje</li>
+          <li>Doporučení: mít při sobě 50–100 € hotově</li>
+        </ul>
+      </div>
+
+      <div class="checklist-card">
+        <h4>Co kupte online předem</h4>
+        <ul>
+          <li>Lodě Königssee (přímo do Saletu)</li>
+          <li>Bus na Orlí hnízdo (vyprodává se)</li>
+          <li>Solný důl (konkrétní čas prohlídky)</li>
+          <li>Online lístky bývají často mírně levnější</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section class="checklist-section" id="checklist">
+  <div class="container">
+    <div class="section-eyebrow">Den před odjezdem</div>
+    <h2>Než vyrazíte<br><em>do hor</em></h2>
+
+    <div class="checklist-grid">
+      <div class="checklist-card">
+        <h4>Mít rezervováno</h4>
+        <ul>
+          <li>Lodě Königssee (středa)</li>
+          <li>Bus Orlí hnízdo (čtvrtek)</li>
+          <li>Solný důl (pátek)</li>
+          <li>Vytisknout PDF lístky</li>
+        </ul>
+      </div>
+
+      <div class="checklist-card">
+        <h4>Oblečení</h4>
+        <ul>
+          <li>Mikiny a bundu (12 °C v dole, 5–10 °C nahoře)</li>
+          <li>Pevné boty na chození</li>
+          <li>Plavky do termálních lázní</li>
+          <li>Vrstvené oblečení pro děti</li>
+        </ul>
+      </div>
+
+      <div class="checklist-card">
+        <h4>Co nezapomenout</h4>
+        <ul>
+          <li>Dalekohled (Rossfeld, Orlí hnízdo)</li>
+          <li>Svačiny a vodu pro děti</li>
+          <li>Doklady dětí (slevy/zdarma)</li>
+          <li>Powerbanku</li>
+        </ul>
+      </div>
+
+      <div class="checklist-card">
+        <h4>Cena kalendáře</h4>
+        <ul>
+          <li>Všechny události s časy</li>
+          <li>Odkazy na rezervace</li>
+          <li>Praktické tipy ke každému dni</li>
+          <li>Připomínka 18. 5. s checklistem</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h3>Přidej si výlet do kalendáře</h3>
+  <p>Stáhni si ICS soubor s celým itinerářem. Funguje v Google Calendar, Apple Calendar i Outlook.</p>
+  <a href="berchtesgaden_2026.ics" download class="cta-button">Stáhnout kalendář ↓</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Berchtesgaden · 19.–23. května 2026</p>
+  <p style="opacity: 0.6; font-size: 0.75rem;">Hotel Rehlegg · Ramsau bei Berchtesgaden · Bavorské Alpy</p>
+  <div class="signature">Těšíme se na hory</div>
+</footer>
+
+</body>
+</html>
